@@ -11,7 +11,7 @@ import java.util.*;
  * @author Corey
  *
  */
-public class Action implements GAparams {
+public class Action implements GAparams{
 
 	/**
 	 * @param args
@@ -29,7 +29,6 @@ public class Action implements GAparams {
 		//create MAX_CHROMS number of CHROMS by calling default constructor
 		
 		for (int i = 0; i < MAX_CHROMS; i++){	
-			
 			chromosone = new Chrom();
 			chroms.add(chromosone);
 			//chroms[i] = chromosone;	
