@@ -1,7 +1,7 @@
 1)
 	THE CORRECT ASSIGNMENT OF AN ARRAY LIST TO A DECLARED ARRAY LIST VARIABLE -
 		I just put an example of how Coupling will have to be changed when you set the global variable
-		currentPopulation equal to the ArrayList that I send through getChroms
+		currentPopulation equal to the ArrayList that I send through setChroms
 		
 		No 'new' is needed, then you set the ArrayList variable directly equal to the incoming list.
 		
