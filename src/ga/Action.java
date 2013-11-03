@@ -33,6 +33,9 @@ public class Action implements GAparams{
 			chroms.add(chromosone);
 			//chroms[i] = chromosone;	
 		}
+		
+		//to check the chromosone int array values
+		chroms.get(0).printGenes();
 
 	}
 
