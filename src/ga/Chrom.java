@@ -32,7 +32,10 @@ public class Chrom implements GAparams{
 	
 	//for testing
 	public void printGenes(){
-		System.out.print(genes);
+		for (int i = 0; i < MAX_GENES; i++){
+			
+			System.out.print(genes[i]);
+		}
 	}
 	
 }

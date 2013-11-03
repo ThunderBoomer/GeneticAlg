@@ -23,7 +23,6 @@ public class Action implements GAparams{
 		//Chrom[] chroms = new Chrom[MAX_CHROMS];
 		Chrom chromosone;
 		
-		
 		//read values from command line (equation using java equation class)
 		
 		//create MAX_CHROMS number of CHROMS by calling default constructor
