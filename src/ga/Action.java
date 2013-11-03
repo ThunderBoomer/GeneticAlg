@@ -30,8 +30,7 @@ public class Action implements GAparams{
 		//create MAX_CHROMS number of CHROMS by calling constructor
 		for (int i = 0; i < MAX_CHROMS; i++){	
 			chromosone = new Chrom();
-			chromsToCoupling.add(chromosone);
-			//chroms[i] = chromosone;	
+			chromsToCoupling.add(chromosone);	
 		}
 		
 		/*//to check the chromosone int array values in index 0,1,2
