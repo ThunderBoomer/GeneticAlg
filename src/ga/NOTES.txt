@@ -38,3 +38,11 @@
 		MAX_CHROMS and MAX_GENES can be obtained through other means.
 		The other variables are irrelevant to the needs of the Coupling class.
 		
+		
+		**********
+		>>>> add "implements GAparams" immediately after the class name in the declaration - 
+		>>>> (as is done with the Action class)
+		>>>> this will allow you to access variables in GAparams directly
+		>>>> - Corey
+		**********
+		

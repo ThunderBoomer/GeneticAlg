@@ -6,3 +6,43 @@
 		No 'new' is needed, then you set the ArrayList variable directly equal to the incoming list.
 		
 		-Corey
+
+2)
+        CODE HAS FEELINGS AS WELL -
+                As the title states, the morale of a single line of code could dictate the outcome of the RUN.
+                This quote: "so getChroms wouldn't feel left out" has proved to me that you not only know of
+                this fact but also actively use it within programming. 
+                
+                Keep up the good work!
+                
+                -Russell
+                
+                P.S. I will post something that possesses a more ligitimate value asap.
+
+3)
+	CHOOSING PARENTS DOES NOT IMPELEMENT ROULETTE WHEEL AS OF YET -
+		Class: Coupling
+		Method: private void chooseParents()
+		Until correct "fitness" values are given, this method chooses two parents randomly.
+		Also, each chromosome has no "weight" greater than any other chromosome.
+
+4)
+	CLASS COUPLING MAY NEED TO BE PASSED VARIABLES FROM CLASS GAPARAMS -
+		Class: Coupling
+		Variables:
+			final static double CROSSOVER_PROB
+			final static double MUTATION_PROB
+
+		Both are needed to check if crossover (coupling), mutation, or cloning occur.		
+		However, not all variables are needed.
+		MAX_CHROMS and MAX_GENES can be obtained through other means.
+		The other variables are irrelevant to the needs of the Coupling class.
+		
+		
+		**********
+		>>>> add "implements GAparams" immediately after the class name in the declaration - 
+		>>>> (as is done with the Action class)
+		>>>> this will allow you to access variables in GAparams directly
+		>>>> - Corey
+		**********
+		
