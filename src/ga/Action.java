@@ -47,6 +47,19 @@ public class Action implements GAparams{
 		//temp call to receive arrays from Coupling class so getChroms wouldn't feel left out
 		chromsFromCoupling = couple.getChroms();
 		
+		/*//Testing: Prints values (Genes and Error) from "TO Coupling" arraylist:
+		for (int i = 0; i < MAX_CHROMS; i++){	
+			(chromsToCoupling.get(i)).printGenes();
+			System.out.println((chromsToCoupling.get(i)).getError());
+		}
+		*/
+		
+		/*//Testing: Prints values (Genes and Error) from "FROM Coupling" arraylist:
+		for (int i = 0; i < MAX_CHROMS; i++){	
+			(chromsToCoupling.get(i)).printGenes();
+			System.out.println((chromsToCoupling.get(i)).getError());
+		}
+		*/
 	}
 
 }
