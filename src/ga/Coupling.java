@@ -66,6 +66,17 @@ public class Coupling {
 		parent2 = currentPopulation.get(p2);
 		//******
 		
+		//Currently unaware if only one option is to be used (cloning, coupling, and mutation).
+		//I assume cloning happens regardless.
+		//Then there are 2 cases:
+		//	Only one of the following can happen: coupling, mutation, neither (cloning).
+		//	Both coupling and mutation (independantly) have the possibility of occuring but might not.
+		
+		//ALSO, read somewhere that cloning and mutation may only use just one chromosome
+		//But i dont think that is the case here.
+		//Just leaving myself a note to check into this possibility.
+		
+		
 		//Time to "couple"
 		
 		int min = 1; //Can't choose the very first gene
@@ -77,6 +88,7 @@ public class Coupling {
 			
 			//genes before (or after) location "genePoint" will be swapped between the two parents
 			//the outcome creates the two children chromosome which will be placed into the newPopulation
+			
 				
 		}
 
