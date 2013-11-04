@@ -6,3 +6,16 @@
 		No 'new' is needed, then you set the ArrayList variable directly equal to the incoming list.
 		
 		-Corey
+		
+2)
+	CODE HAS FEELINGS AS WELL -
+		As the title states, the morale of a single line of code could dictate the outcome of the RUN.
+		This quote: "so getChroms wouldn't feel left out" has proved to me that you not only know of
+		this fact but also actively use it within programming. 
+		
+		Keep up the good work!
+		
+		-Russell
+		
+		P.S. I will post something that possesses a more ligitimate value asap. 
+		
