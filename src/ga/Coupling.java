@@ -10,8 +10,8 @@ import java.util.*;
  */
 public class Coupling {
 	
-	ArrayList<Chrom> currentPopulation = new ArrayList<Chrom>();
-	ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
+	private ArrayList<Chrom> currentPopulation;
+	private ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
 
 	/**
 	 * @param args
@@ -21,7 +21,7 @@ public class Coupling {
 	}
 
 	public void setChroms(ArrayList<Chrom> currentPopulation){
-		
+		this.currentPopulation = currentPopulation;
 	}
 	
 	public ArrayList<Chrom> getChroms (){
