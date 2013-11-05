@@ -8,7 +8,7 @@ import java.util.*;
  * @author Russell
  *
  */
-public class Coupling {
+public class Coupling implements GAparams {
 	
 	private ArrayList<Chrom> currentPopulation;
 	private ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
@@ -36,20 +36,32 @@ public class Coupling {
 		
 		Chrom parent1;
 		Chrom parent2;
+		Chrom child1;
+		Chrom child2;
 		
 		int genePoint; //variable used to point to location of gene swap (and mutation) within chromosomes
 		
 		Random r = new Random();
 		//Choose first Parent
-		p1 = r.nextInt(100-0) + 0;
+		p1 = r.nextInt(MAX_CHROMS); //100-0) + 0;
 		//pass int value of p1 to CLASS Roulette
 		//CLASS Roulette will judge which chromosome that p1 "falls" into
 		//The returning value, from CLASS Roulette, is the chosen parent chromosome
 		
 		//However, because of the fore mentioned issue, p1 will be given a random int value between 0 and (MAX_CHROMS-1)
 		//This will choose parents from the entire population and without weights attached to each chromosome
-		System.out.println(currentPopulation.size());
-		p1 = r.nextInt(currentPopulation.size() - 0) + 0;
+		
+		
+		//p1 = r.nextInt(MAX_CHROMS); //-0) + 0
+		
+		
+		//If we make the population of each "generation" dynamic, this code might be helpful.
+		//*****
+		//System.out.println(currentPopulation.size());
+		//p1 = r.nextInt(currentPopulation.size() - 0) + 0;
+		//*****
+		
+		
 		
 		//Choose second Parent
 		p2 = r.nextInt(100-0) + 0;
@@ -76,40 +88,50 @@ public class Coupling {
 		//But i dont think that is the case here.
 		//Just leaving myself a note to check into this possibility.
 		
+		//Going off the assumption both, neither, or just one can happen.
 		
-		//Time to "couple"
-		
+		//*****
 		int min = 1; //Can't choose the very first gene
-		int max = (parent1.getGenes()).length-1; //Can't choose the very last gene
+		int max = MAX_GENES - 1;
+		
+		//int max = (parent1.getGenes()).length-1; //Can't choose the very last gene
+		
+		//Cloning: just in case "coupling" does not occur
+		
+		child1 = parent1;
+		child2 = parent2;
+		
+		//Checking if parents "couple"
 		
 		if(r.nextDouble()*100 <= 80) //0.0 to 100.0 if <= 80.0 then crossover occurs (coupling)
 		{
-			genePoint = r.nextInt(max - min) + min;
+			genePoint = r.nextInt(max - min) + min; //crossover point
 			
 			//genes before (or after) location "genePoint" will be swapped between the two parents
 			//the outcome creates the two children chromosome which will be placed into the newPopulation
 			
 				
 		}
-
-		//Mutate? Or not to... I'll stop...
+		
+		//Checking if children "mutate"
+		
 		if(r.nextDouble()*100 <= 2) //0.0 to 100.0 if <= 2.0 then mutate
 		{
 			//Mutation
 			//Choose Mutation location within both chromosomes
 			//int min = 1; //Can't choose the very first gene
 			//int max = (parent1.getGenes()).length-1; //Can't choose the very last gene
-			genePoint = r.nextInt(max - min) + min;
+			genePoint = r.nextInt(max - min) + min; //mutation point, in this case only one gene is altered.
+			//So the mutation point changes to one of the other operators...maybe the same, should we let this happen?
+			
+			//will both children mutate at the same spot? will that spot only be just one gene?
 			
 			//Mutation will alter a certain amount of genes before (or after) location "genePoint"
 			
+			//maybe each child should be tested separately so that one, both or neither may mutate.
 			
-			
-		}
-		//else no Mutation
+		} //else no Mutation
 		
-		
-		
-		
+		//*****
 	}
 }
