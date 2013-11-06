@@ -12,6 +12,7 @@ public interface GAparams{
 	
 	//number of iterations program runs without successful solution - used in Action
 	//SHOULD UPDATE TO BE LARGER/SMALLER BASED ON OUTCOME OF TRIALS
-	final static int MAX_GENERATIONS = 10000;
+	//final static int MAX_GENERATIONS = 10000;
+	//^^^THIS VARIABLE DECLARED IN I2F, CLASS 'ACTION' WILL EXTEND I2F
 	
 }
