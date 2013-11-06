@@ -66,15 +66,20 @@ public class Action extends I2F implements GAparams{
 					//and other required info to STM
 					error = stm.interpretSTM(chromsToCoupling.get(i).getGenes(), MAX_GENES, argsFromI2F, argsFromI2F.length);
 				
+					//error returned by stm - if 0 then tier1 (1 by default)
 					if (error == 0){
 						chromsToCoupling.get(i).setError(TIER1);
 						
+						//if error0 && only one item left on stack, then ALSO tier2 (20 by default)
 						if(stm.getStackPointer() == 1){
 							chromsToCoupling.get(i).setError(TIER2);
 							
+							//if error0 && only one item && correct answer, then ALSO tier3 (400 by default)
 							if(stm.SPEEK() == I2F.answer){
 								chromsToCoupling.get(i).setError(TIER3);
 							}
+							//if error0 && only one item && NOT correct answer,
+							//fitval ALSO tier3 * 1/1+absolute value of i2f answer - value on stack 
 							else {
 								tier3Error = Math.abs(I2F.answer - stm.SPEEK());
 								
@@ -83,17 +88,22 @@ public class Action extends I2F implements GAparams{
 						}
 							
 					}
+					//stm exited with error - fitval set to 0
 					else
 						chromsToCoupling.get(i).setError(0);
 				}
 				
 			}
 			
+			
+			//after assigning fitness values, sends current generation to Coupling
 			couple.setChroms(chromsToCoupling);
 				
 			//Perhaps we can cut this down to operating with a single arrayList by using
-			//chromsToCoupling = couple.getChroms();
-			chromsFromCoupling = couple.getChroms();
+			chromsToCoupling = couple.getChroms();
+			
+			//instead of
+			//chromsFromCoupling = couple.getChroms();
 				
 			
 			
