@@ -39,6 +39,7 @@ public class Coupling implements GAparams {
 		Chrom child1;
 		Chrom child2;
 		
+		
 		int genePoint; //variable used to point to location of gene swap (and mutation) within chromosomes
 		
 		Random r = new Random();
@@ -93,18 +94,19 @@ public class Coupling implements GAparams {
 		//*****
 		int min = 1; //Can't choose the very first gene
 		int max = MAX_GENES - 1;
-		
+		int[] genes = new int[MAX_GENES];
 		//int max = (parent1.getGenes()).length-1; //Can't choose the very last gene
 		
 		//Cloning: just in case "coupling" does not occur
 		
 		child1 = parent1;
 		child2 = parent2;
-		
+		genes = child1.getGenes();
 		//Checking if parents "couple"
 		
 		if(r.nextDouble()*100 <= 80) //0.0 to 100.0 if <= 80.0 then crossover occurs (coupling)
 		{
+			genes = parent1.getGenes();
 			genePoint = r.nextInt(max - min) + min; //crossover point
 			
 			//genes before (or after) location "genePoint" will be swapped between the two parents
