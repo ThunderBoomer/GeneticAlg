@@ -46,3 +46,26 @@
 		>>>> - Corey
 		**********
 		
+		
+5)
+	FITNESS VALUES WORK, THEORETICAL CHANGE TO ARRAY LIST STRUCTURE
+	Class: Action
+	
+	I'm not actually currently using chromsFromCoupling, instead just updating chromsToCoupling
+	after sending them. This may/may not work, I can't remember if we needed the old generation for
+	anything
+	
+	As it stands, I believe I'm done with Action unless I've overlooked anything that needs to happen.
+	
+	It updates fitness values based on all the crazy I2F/STM silliness and sends you the current gen
+	
+	2 things: 1) chroms 'error'(fitnessvalue) is now a double, to take care of case answer was wrong.
+			  
+			  2) The placement of the call for i2f's generate test case is placed right now within
+			     the main do/while loop of class 'ACTION' this generates a new test case for every gen.
+			  
+			  	 If this is wrong, comment out block (2) of "I DON'T KNOW WHERE THIS GOES", and
+			  	 uncomment (1). This will create one test case for entire program run.
+			  	 
+			  	 Will check later
+			 

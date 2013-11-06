@@ -28,11 +28,16 @@ public class Action extends I2F implements GAparams{
 		//IT IS POSSIBLE stm needs to be created on every loop down below, but unlikely.
 		STM stm = new STM();
 		
+		//for while loop
 		int generationCount = 0;
 		
+		//local storage of args array in I2F -- POSSIBLY REDUNDANT
 		int[] argsFromI2F;
 		
+		//return value of stm
 		int error;
+		
+		//used to calculcate tier3 if answer is wrong
 		double tier3Error;
 		
 		//read values from command line (equation using java equation class) - TO BE DONE LATER
@@ -59,7 +64,7 @@ public class Action extends I2F implements GAparams{
 			//for every chrom in ArrayList
 			for (int i = 0; i < MAX_CHROMS; i++){
 				
-				//for however many times the test for each chrom will run
+				//for however many times the test for each chrom will run (currently 10 - set in I2F)
 				for (int j = 0; j < COUNT; j++){
 					
 					//Sends array of genes belonging to the chromosone at index i of chromsToCoupling
@@ -106,14 +111,15 @@ public class Action extends I2F implements GAparams{
 			//chromsFromCoupling = couple.getChroms();
 				
 			
-			
+			//GUESS WHAT THIS DOES
 			generationCount++;
 			
-		} while (generationCount < MAX_GENERATIONS);
+		}while (generationCount < MAX_GENERATIONS);
 		
-	}
+	}//END MAIN
 
-}
+
+}//END CLASS
 
 
 
