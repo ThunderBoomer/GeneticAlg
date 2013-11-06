@@ -11,7 +11,7 @@ package ga;
 public class Chrom implements GAparams{
 
 	private int[] genes = new int[MAX_GENES];
-	private int error = 0; //value returned by STM - assumed to be fitness value - defaulted to 0
+	private double error = 0; //value returned by STM - assumed to be fitness value - defaulted to 0
 	
 	public Chrom(){
 	
@@ -22,12 +22,12 @@ public class Chrom implements GAparams{
 	
 	}
 	
-	public int getError(){
+	public double getError(){
 		return error;
 	}
 	
-	public void setError(int fitVal){
-		this.error = fitVal;
+	public void setError(double d){
+		this.error += d;
 	}
 	
 	public int[] getGenes(){

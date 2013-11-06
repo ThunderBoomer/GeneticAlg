@@ -25,6 +25,16 @@ public class Action extends I2F implements GAparams{
 		Chrom chromosone;
 		Coupling couple = new Coupling();
 		
+		//IT IS POSSIBLE stm needs to be created on every loop down below, but unlikely.
+		STM stm = new STM();
+		
+		int generationCount = 0;
+		
+		int[] argsFromI2F;
+		
+		int error;
+		double tier3Error;
+		
 		//read values from command line (equation using java equation class) - TO BE DONE LATER
 		
 		//create MAX_CHROMS number of CHROMS by calling constructor
@@ -32,6 +42,64 @@ public class Action extends I2F implements GAparams{
 			chromosone = new Chrom();
 			chromsToCoupling.add(chromosone);	
 		}
+		
+		//(1)NOT SURE WHERE THIS GOES
+		//builds args array from I2F and stores it locally
+		//generateTestCase();
+		//argsFromI2F = I2F.args;
+		
+		//MEAT AND POTATOES
+		do{
+			
+			//(2)NOT SURE WHERE THIS GOES
+			//builds args array from I2F and stores it locally
+			generateTestCase();
+			argsFromI2F = I2F.args;
+			
+			//for every chrom in ArrayList
+			for (int i = 0; i < MAX_CHROMS; i++){
+				
+				//for however many times the test for each chrom will run
+				for (int j = 0; j < COUNT; j++){
+					
+					//Sends array of genes belonging to the chromosone at index i of chromsToCoupling
+					//and other required info to STM
+					error = stm.interpretSTM(chromsToCoupling.get(i).getGenes(), MAX_GENES, argsFromI2F, argsFromI2F.length);
+				
+					if (error == 0){
+						chromsToCoupling.get(i).setError(TIER1);
+						
+						if(stm.getStackPointer() == 1){
+							chromsToCoupling.get(i).setError(TIER2);
+							
+							if(stm.SPEEK() == I2F.answer){
+								chromsToCoupling.get(i).setError(TIER3);
+							}
+							else {
+								tier3Error = Math.abs(I2F.answer - stm.SPEEK());
+								
+								chromsToCoupling.get(i).setError(TIER3 * (1/(1+tier3Error)));
+							}
+						}
+							
+					}
+					else
+						chromsToCoupling.get(i).setError(0);
+				}
+				
+			}
+			
+			couple.setChroms(chromsToCoupling);
+				
+			//Perhaps we can cut this down to operating with a single arrayList by using
+			//chromsToCoupling = couple.getChroms();
+			chromsFromCoupling = couple.getChroms();
+				
+			
+			
+			generationCount++;
+			
+		} while (generationCount < MAX_GENERATIONS);
 		
 	}
 

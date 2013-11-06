@@ -25,10 +25,10 @@ public abstract class I2F {
 	double maxFit[] = new double [MAX_GENERATIONS/STEP+1];
 
 	/* Test cases */
-	int[] args;
-	double answer;
+	static int[] args;
+	static double answer;
 
-	public void generateTestCase(){
+	public static void generateTestCase(){
 		int[] a = {(int)(Math.random()*31) + 1,
 		           (int)(Math.random()*31) + 1,
 					  (int)(Math.random()*31) + 1
