@@ -12,6 +12,7 @@ public class Chrom implements GAparams{
 
 	private int[] genes = new int[MAX_GENES];
 	private double error = 0; //value returned by STM - assumed to be fitness value - defaulted to 0
+	private double fitnessRatio;
 	
 	public Chrom(){
 	
@@ -47,6 +48,14 @@ public class Chrom implements GAparams{
 		for (int i = 0; i < MAX_GENES; i++){
 			System.out.print(genes[i]);
 		}
+	}
+	
+	public void setRatio(double fitnessRatio){
+		this.fitnessRatio = fitnessRatio;	
+	}
+	
+	public double getRatio(){
+		return fitnessRatio;
 	}
 	
 }
