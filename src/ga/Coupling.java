@@ -13,6 +13,10 @@ public class Coupling extends I2F implements GAparams {
 	private ArrayList<Chrom> currentPopulation;
 	private ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
 	private double sumOfFitnessVal;
+	private double genMin;
+	private double genMax;
+	private double genAvg;
+	
 
 	/**
 	 * @param args
@@ -35,6 +39,26 @@ public class Coupling extends I2F implements GAparams {
 		
 		return newPopulation;
 	}
+	
+	public void setGenMin(double genMin)
+	{
+		this.genMin = genMin;
+	}
+	public double getGenMin()
+	{
+		return genMin;
+	}
+	
+	public void setGenMax(double genMax)
+	{
+		this.genMax = genMax;
+	}
+	public double getGenMax()
+	{
+		return genMax;
+	}
+	
+	
 	
 	
 	
