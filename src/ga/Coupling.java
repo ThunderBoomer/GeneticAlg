@@ -16,29 +16,72 @@ public class Coupling extends I2F implements GAparams {
 	private double genMin;
 	private double genMax;
 	private double genAvg;
-	
+	private double gen;	
 
 	/**
 	 * @param args
 	 */
 	public Coupling(){
-		
+		gen = 0;
 	}
 
 	public void setChroms(ArrayList<Chrom> currentPopulation, double sumOfFitnessVal){
+		System.out.println("********************************************************************************************");
+		//System.out.println(gen);
+		gen++;
 		this.currentPopulation = currentPopulation;
 		this.sumOfFitnessVal = sumOfFitnessVal; 
 		int count = 0;
+		
+		setGenAvg(sumOfFitnessVal/MAX_CHROMS);
+		System.out.print("Gen" + gen + " :: Gen Avg : " + getGenAvg());
+		//System.out.println("Starting preRouletteSetup");
+		preRouletteSetup();
+		//System.out.println("preRouletteSetup Ended");
 		do
 		{
+			//System.out.println("Chrom: " + count);
 			chooseParents();
-		}while (count < MAX_GENERATIONS);
+			count++;
+		//}while (count < MAX_GENERATIONS); //I slipped up on this one...how did this get by... apparently I wanted to run this MAX_GENERATIONS * MAX_GENERATIONS
+		}while(count < (MAX_CHROMS/2)); //chooseParents() produces 2 children from 2 adults... so 2 * 1500 is... MAX_CHROMS! WE DID IT!
 	}
 	
 	public ArrayList<Chrom> getChroms(){
 		
 		return newPopulation;
 	}
+	
+	public void preRouletteSetup()
+	{
+		//gets all the parents ready for the Roulette of who gets a baby
+		Chrom curPopChrom;
+		int count = 0;
+		//System.out.println("preRouletteSetup Loop Begins");
+		do{
+			//if(count % 100 == 0)
+			//{
+			//	System.out.print("count : "+count+" : ");
+			//}
+			curPopChrom = currentPopulation.get(count);
+			curPopChrom.setRatio(curPopChrom.getError()/getGenSumOfFitnessVal());
+			
+			if(curPopChrom.getError() > getGenMax())
+			{
+				setGenMax(curPopChrom.getError());
+			}
+			else if(curPopChrom.getError() < getGenMin())
+			{
+				setGenMin(curPopChrom.getError());
+			}
+			count++;
+		}while(count<MAX_CHROMS);
+		//System.out.println("preRouletteSetup Loop Ends");
+	}
+	
+	
+	
+	
 	
 	public void setGenMin(double genMin)
 	{
@@ -56,6 +99,24 @@ public class Coupling extends I2F implements GAparams {
 	public double getGenMax()
 	{
 		return genMax;
+	}
+	
+	public void setGenAvg(double genAvg)
+	{
+		this.genAvg = genAvg;
+	}
+	public double getGenAvg()
+	{
+		return genAvg;
+	}
+	
+	public void setGenSumOfFitnessVal(double sumOfFitnessVal)
+	{
+		this.sumOfFitnessVal = sumOfFitnessVal;
+	}
+	public double getGenSumOfFitnessVal()
+	{
+		return sumOfFitnessVal;
 	}
 	
 	
@@ -138,12 +199,12 @@ public class Coupling extends I2F implements GAparams {
 		ch2Genes = parent2.getGenes();
 		
 		
-		parent1.printGenes();
-		System.out.println();
-		parent2.printGenes();
-		System.out.println();
+		//parent1.printGenes();
+		//System.out.println();
+		//parent2.printGenes();
+		//System.out.println();
 
-		System.out.print("************");
+		//System.out.print("************");
 		
 		
 		
@@ -198,7 +259,7 @@ public class Coupling extends I2F implements GAparams {
 				
 			}
 			
-			System.out.print("C is True "+ randVal +"\t");
+			//System.out.print("C is True "+ randVal +"\t");
 			//genes before (or after) location "genePoint" will be swapped between the two parents
 			//the outcome creates the two children chromosome which will be placed into the newPopulation
 			
@@ -233,7 +294,7 @@ public class Coupling extends I2F implements GAparams {
 			System.out.println("mValue: "+mValue);
 			System.out.println();			
 			*/
-			System.out.print("M1 is True "+ randVal +"\t");
+			//System.out.print("M1 is True "+ randVal +"\t");
 			ch1Genes[genePoint] = mValue;
 			
 			
@@ -255,7 +316,7 @@ public class Coupling extends I2F implements GAparams {
 			System.out.println("mValue: "+mValue);
 			System.out.println();			
 			*/
-			System.out.print("M2 is True "+ randVal +"\t");
+			//System.out.print("M2 is True "+ randVal +"\t");
 			
 			ch2Genes[genePoint] = mValue;
 			
@@ -270,12 +331,12 @@ public class Coupling extends I2F implements GAparams {
 		Chrom child1 = new Chrom(ch1Genes);
 		Chrom child2 = new Chrom(ch2Genes);
 		
-		System.out.println("************");
+		//System.out.println("************");
 		
-		child1.printGenes();
-		System.out.println();
-		child2.printGenes();
-		System.out.println();
+		//child1.printGenes();
+		//System.out.println();
+		//child2.printGenes();
+		//System.out.println();
 		
 		newPopulation.add(child1);
 		newPopulation.add(child2);
