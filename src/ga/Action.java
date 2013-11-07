@@ -113,7 +113,7 @@ public class Action extends I2F implements GAparams{
 			
 			
 			//after assigning fitness values, sends current generation to Coupling
-			couple.setChroms(chromsToCoupling);
+			couple.setChroms(chromsToCoupling, sumOfFitnessValues);
 				
 			//Perhaps we can cut this down to operating with a single arrayList by using
 			

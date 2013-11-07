@@ -12,6 +12,7 @@ public class Coupling extends I2F implements GAparams {
 	
 	private ArrayList<Chrom> currentPopulation;
 	private ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
+	private double sumOfFitnessVal;
 
 	/**
 	 * @param args
@@ -20,8 +21,9 @@ public class Coupling extends I2F implements GAparams {
 		
 	}
 
-	public void setChroms(ArrayList<Chrom> currentPopulation){
+	public void setChroms(ArrayList<Chrom> currentPopulation, double sumOfFitnessVal){
 		this.currentPopulation = currentPopulation;
+		this.sumOfFitnessVal = sumOfFitnessVal; 
 		int count = 0;
 		do
 		{
@@ -29,10 +31,12 @@ public class Coupling extends I2F implements GAparams {
 		}while (count < MAX_GENERATIONS);
 	}
 	
-	public ArrayList<Chrom> getChroms (){
+	public ArrayList<Chrom> getChroms(){
 		
 		return newPopulation;
 	}
+	
+	
 	
 	//chooseParents() will not be able to be coded properly without correct "fitness" values
 	public void chooseParents(){
