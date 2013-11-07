@@ -31,6 +31,9 @@ public class Action extends I2F implements GAparams{
 		//for while loop
 		int generationCount = 0;
 		
+		//sum of fitness values for generation
+		double sumOfFitnessValues;
+		
 		//local storage of args array in I2F -- POSSIBLY REDUNDANT
 		int[] argsFromI2F;
 		
@@ -61,6 +64,9 @@ public class Action extends I2F implements GAparams{
 			generateTestCase();
 			argsFromI2F = I2F.args;
 			
+			//reset sumOfFitnessValues to 0 for ever gen.
+			sumOfFitnessValues = 0;
+			
 			//for every chrom in ArrayList
 			for (int i = 0; i < MAX_CHROMS; i++){
 				
@@ -71,23 +77,28 @@ public class Action extends I2F implements GAparams{
 					//and other required info to STM
 					error = stm.interpretSTM(chromsToCoupling.get(i).getGenes(), MAX_GENES, argsFromI2F, argsFromI2F.length);
 				
-					//error returned by stm - if 0 then tier1 (1 by default)
+					//error returned by stm - if 0 then tier1 (1 by default), add TIER1 to sum
 					if (error == 0){
 						chromsToCoupling.get(i).setError(TIER1);
+						sumOfFitnessValues += TIER1;
+						
 						
 						//if error0 && only one item left on stack, then ALSO tier2 (20 by default)
 						if(stm.getStackPointer() == 1){
 							chromsToCoupling.get(i).setError(TIER2);
+							sumOfFitnessValues += TIER2;
 							
 							//if error0 && only one item && correct answer, then ALSO tier3 (400 by default)
 							if(stm.SPEEK() == I2F.answer){
 								chromsToCoupling.get(i).setError(TIER3);
+								sumOfFitnessValues += TIER3;
+								
 							}
 							//if error0 && only one item && NOT correct answer,
 							//fitval ALSO tier3 * 1/1+absolute value of i2f answer - value on stack 
 							else {
 								tier3Error = Math.abs(I2F.answer - stm.SPEEK());
-								
+								sumOfFitnessValues += tier3Error;
 								chromsToCoupling.get(i).setError(TIER3 * (1/(1+tier3Error)));
 							}
 						}
