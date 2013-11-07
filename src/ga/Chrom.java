@@ -22,6 +22,14 @@ public class Chrom implements GAparams{
 	
 	}
 	
+	public Chrom(int gene[]){
+		
+		this.genes = gene;
+		//test
+		//printGenes();
+		//****
+	}
+	
 	public double getError(){
 		return error;
 	}

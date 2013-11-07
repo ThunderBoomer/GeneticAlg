@@ -4,7 +4,7 @@ public abstract class I2F {
 
 	/* Constants used for fitness evaluation */
 
-	final static int MAX_GENERATIONS		= 100000;
+	final static int MAX_GENERATIONS		= 10000;
 	final static int STEP = 100; // how often the output is produced
 
 	final static int COUNT   = 10; // number of test cases per generation

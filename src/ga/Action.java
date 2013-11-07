@@ -105,6 +105,7 @@ public class Action extends I2F implements GAparams{
 			couple.setChroms(chromsToCoupling);
 				
 			//Perhaps we can cut this down to operating with a single arrayList by using
+			
 			chromsToCoupling = couple.getChroms();
 			
 			//instead of
@@ -113,7 +114,12 @@ public class Action extends I2F implements GAparams{
 			
 			//GUESS WHAT THIS DOES
 			generationCount++;
-			
+			if(generationCount % 1000 == 0)
+			{
+				System.out.println(generationCount);
+				//couple.chooseParents();
+				System.out.println();
+			}
 		}while (generationCount < MAX_GENERATIONS);
 		
 	}//END MAIN
