@@ -10,8 +10,10 @@ import java.util.*;
  */
 public class Coupling extends I2F implements GAparams {
 	
+	private Roulette rouletteWheel;
 	private ArrayList<Chrom> currentPopulation;
 	private ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
+	private double[] eachFitRatio;
 	private double sumOfFitnessVal;
 	private double genMin;
 	private double genMax;
@@ -74,12 +76,16 @@ public class Coupling extends I2F implements GAparams {
 			{
 				setGenMin(curPopChrom.getError());
 			}
+			eachFitRatio[count] = curPopChrom.getRatio();
 			count++;
 		}while(count<MAX_CHROMS);
 		//System.out.println("preRouletteSetup Loop Ends");
 	}
 	
-	
+	public void rouletteInUse(ArrayList<Chrom> currentPopulation)
+	{
+		rouletteWheel = new Roulette(currentPopulation, eachFitRatio);
+	}
 	
 	
 	
