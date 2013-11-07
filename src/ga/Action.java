@@ -53,16 +53,16 @@ public class Action extends I2F implements GAparams{
 		
 		//(1)NOT SURE WHERE THIS GOES
 		//builds args array from I2F and stores it locally
-		//generateTestCase();
-		//argsFromI2F = I2F.args;
+		generateTestCase();
+		argsFromI2F = I2F.args;
 		
 		//MEAT AND POTATOES
 		do{
 			
 			//(2)NOT SURE WHERE THIS GOES
 			//builds args array from I2F and stores it locally
-			generateTestCase();
-			argsFromI2F = I2F.args;
+			//generateTestCase();
+			//argsFromI2F = I2F.args;
 			
 			//reset sumOfFitnessValues to 0 for ever gen.
 			sumOfFitnessValues = 0;

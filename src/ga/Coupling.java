@@ -13,7 +13,7 @@ public class Coupling extends I2F implements GAparams {
 	private Roulette rouletteWheel;
 	private ArrayList<Chrom> currentPopulation;
 	private ArrayList<Chrom> newPopulation = new ArrayList<Chrom>();
-	private double[] eachFitRatio;
+	private double[] eachFitRatio = new double[MAX_CHROMS];
 	private double sumOfFitnessVal;
 	private double genMin;
 	private double genMax;
@@ -28,15 +28,18 @@ public class Coupling extends I2F implements GAparams {
 	}
 
 	public void setChroms(ArrayList<Chrom> currentPopulation, double sumOfFitnessVal){
-		System.out.println("********************************************************************************************");
+		//System.out.println("********************************************************************************************");
 		//System.out.println(gen);
 		gen++;
 		this.currentPopulation = currentPopulation;
 		this.sumOfFitnessVal = sumOfFitnessVal; 
 		int count = 0;
 		
+		
+		
 		setGenAvg(sumOfFitnessVal/MAX_CHROMS);
-		System.out.print("Gen" + gen + " :: Gen Avg : " + getGenAvg());
+		System.out.print("Gen " + gen + " :: Gen Avg : " + getGenAvg());
+		System.out.println(" :: sum: " + sumOfFitnessVal);
 		//System.out.println("Starting preRouletteSetup");
 		preRouletteSetup();
 		//System.out.println("preRouletteSetup Ended");
@@ -80,11 +83,12 @@ public class Coupling extends I2F implements GAparams {
 			count++;
 		}while(count<MAX_CHROMS);
 		//System.out.println("preRouletteSetup Loop Ends");
+		rouletteInUse();
 	}
 	
-	public void rouletteInUse(ArrayList<Chrom> currentPopulation)
+	public void rouletteInUse()//ArrayList<Chrom> currentPopulation)
 	{
-		rouletteWheel = new Roulette(currentPopulation, eachFitRatio);
+		rouletteWheel = new Roulette(currentPopulation, eachFitRatio, gen);
 	}
 	
 	
