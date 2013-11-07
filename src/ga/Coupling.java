@@ -32,24 +32,37 @@ public class Coupling extends I2F implements GAparams {
 		//System.out.println(gen);
 		gen++;
 		this.currentPopulation = currentPopulation;
-		this.sumOfFitnessVal = sumOfFitnessVal; 
+		this.sumOfFitnessVal = sumOfFitnessVal;
+		
 		int count = 0;
 		
 		
 		
+		
 		setGenAvg(sumOfFitnessVal/MAX_CHROMS);
-		System.out.print("Gen " + gen + " :: Gen Avg : " + getGenAvg());
-		System.out.println(" :: sum: " + sumOfFitnessVal);
-		//System.out.println("Starting preRouletteSetup");
+		System.out.print("Gen " + gen);// + " :: Gen Avg : " + getGenAvg());
+		//System.out.println(" :: sum: " + sumOfFitnessVal);
+		System.out.println("Starting preRouletteSetup");
 		preRouletteSetup();
-		//System.out.println("preRouletteSetup Ended");
+		System.out.println("preRouletteSetup Ended");
+		System.out.println("rouletteInUse Started");
+		rouletteInUse();
+		System.out.println("rouletteInUse Ended");
+		double pointer=0;
+		
+		
+		
+		
+		System.out.println("chooseParents loop Started");
 		do
 		{
 			//System.out.println("Chrom: " + count);
-			chooseParents();
+			chooseParents(pointer);
 			count++;
+			
 		//}while (count < MAX_GENERATIONS); //I slipped up on this one...how did this get by... apparently I wanted to run this MAX_GENERATIONS * MAX_GENERATIONS
 		}while(count < (MAX_CHROMS/2)); //chooseParents() produces 2 children from 2 adults... so 2 * 1500 is... MAX_CHROMS! WE DID IT!
+		System.out.println("chooseParents loop Ended");
 	}
 	
 	public ArrayList<Chrom> getChroms(){
@@ -71,6 +84,7 @@ public class Coupling extends I2F implements GAparams {
 			curPopChrom = currentPopulation.get(count);
 			curPopChrom.setRatio(curPopChrom.getError()/getGenSumOfFitnessVal());
 			
+			
 			if(curPopChrom.getError() > getGenMax())
 			{
 				setGenMax(curPopChrom.getError());
@@ -83,11 +97,12 @@ public class Coupling extends I2F implements GAparams {
 			count++;
 		}while(count<MAX_CHROMS);
 		//System.out.println("preRouletteSetup Loop Ends");
-		rouletteInUse();
+		
 	}
 	
 	public void rouletteInUse()//ArrayList<Chrom> currentPopulation)
 	{
+		
 		rouletteWheel = new Roulette(currentPopulation, eachFitRatio, gen);
 	}
 	
@@ -134,20 +149,25 @@ public class Coupling extends I2F implements GAparams {
 	
 	
 	//chooseParents() will not be able to be coded properly without correct "fitness" values
-	public void chooseParents(){
-		int p1;
-		int p2;
+	public void chooseParents(double pointer){
+		double p1;
+		double p2;
 		
 		Chrom parent1;
 		Chrom parent2;
-
+		//findParent(point);
 		
 		
 		int genePoint; //variable used to point to location of gene swap (and mutation) within chromosomes
 		
 		Random r = new Random();
 		//Choose first Parent
-		p1 = r.nextInt(MAX_CHROMS); //100-0) + 0;
+		//p1 = r.nextInt(MAX_CHROMS); //100-0) + 0;
+		pointer = rouletteWheel.spin(pointer);
+		
+		parent1 = rouletteWheel.findParent(pointer);
+		p1 = parent1.getRatio();
+		
 		//pass int value of p1 to CLASS Roulette
 		//CLASS Roulette will judge which chromosome that p1 "falls" into
 		//The returning value, from CLASS Roulette, is the chosen parent chromosome
@@ -168,18 +188,33 @@ public class Coupling extends I2F implements GAparams {
 		
 		
 		//Choose second Parent
-		p2 = r.nextInt(100-0) + 0;
+		
+		
+		
+		
+		pointer = rouletteWheel.spin(pointer);
+		parent2 = rouletteWheel.findParent(pointer);
+		p2 = parent2.getRatio();
+		
+		
+		System.out.println("1Started same?");
 		while(p1==p2)
 		{
-			p2 = r.nextInt(100-0) + 0;
+			//System.out.println("pointer: "+pointer);
+			System.out.println("p1: "+parent1.getRatio());
+			System.out.println("p2: "+parent2.getRatio());
+			pointer = rouletteWheel.spin(pointer);
+			parent2 = rouletteWheel.findParent(pointer);
+			p2 = parent2.getRatio();
 			//pass new p2 back to CLASS Roulette for a different parent
 			//No a-sexual chromosomes allowed...ever
 		}
-		
+		System.out.println("Started same?");
+		//parent2 = rouletteWheel.findParent(pointer);
 		//Outright bypassing CLASS Roulette for right now
 		//******
-		parent1 = currentPopulation.get(p1);
-		parent2 = currentPopulation.get(p2);
+		//parent1 = currentPopulation.get(p1);
+		//parent2 = currentPopulation.get(p2);
 		//******
 		
 		//Currently unaware if only one option is to be used (cloning, coupling, and mutation).
